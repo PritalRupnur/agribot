@@ -6,17 +6,17 @@ import RPi.GPIO as GPIO
 #float(x)
 #range=0.0
 #float(range)
-DIR = 38
-STEP =40
+DIR = 28
+STEP =29
 CW = 1
 CCW = 0
 #LOOP=1000 SPR =200
-EN=37
-M0=35
-M1=33
-M2=31
+EN=25
+M0=24
+M1=23
+M2=22
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(EN,GPIO.OUT)
 GPIO.setup(M0,GPIO.OUT)
 GPIO.setup(M1,GPIO.OUT)
@@ -27,7 +27,7 @@ GPIO.output(EN, GPIO.LOW)
 GPIO.output(DIR, GPIO.HIGH)
 #step_count = SPR
 #lp=LOOP
-delay=0.0005
+delay=0.05
 GPIO.output(M0,GPIO.LOW)
 GPIO.output(M1,GPIO.LOW)
 GPIO.output(M2,GPIO.LOW)
@@ -54,23 +54,24 @@ while(1):
    GPIO.output(STEP, GPIO.LOW)
    print('mai low hu')
    sleep(delay)
-  sleep(0.5)
+  sleep(0.005)
  else:
   step_count=(step_count)*(-1)
+  print(step_count)
     #GPIO.output(DIR, GPIO.LOW)
     # print('ulta ghumo')
   for x in range(step_count):
    GPIO.output(DIR, GPIO.LOW)
    print('ulta ghumo')
    GPIO.output(EN, GPIO.LOW)
-   GPIO.output(DIR, GPIO.LOW)
+   #GPIO.output(DIR, GPIO.LOW)
    GPIO.output(STEP, GPIO.HIGH)
    print('mai ulta high hu')
    sleep(delay)
    GPIO.output(STEP, GPIO.LOW)
    print('mai ulta low hu')
    sleep(delay)
-  sleep(0.5)
+  sleep(0.005)
 GPIO.output(EN,GPIO.HIGH)
 GPIO.cleanup()
 
